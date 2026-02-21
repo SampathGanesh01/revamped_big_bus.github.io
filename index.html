@@ -1,49 +1,1957 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hi</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BigBus — Luxury Bus Travel Reimagined</title>
+    <meta name="description"
+        content="BigBus offers premium luxury sleeper bus travel across South India. Book tickets online for Hyderabad, Bangalore, Chennai, Vijayawada, Tirupati and more. Live tracking, onboard WiFi, and world-class comfort." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap"
+        rel="stylesheet" />
     <style>
-        * {
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #0a0e1a;
+            --navy-light: #0f1628;
+            --navy-card: #111827;
+            --accent: #f59e0b;
+            --accent-2: #fb923c;
+            --red: #ef4444;
+            --blue: #3b82f6;
+            --teal: #14b8a6;
+            --text: #f1f5f9;
+            --muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.08);
+            --glass: rgba(255, 255, 255, 0.05);
+            --glow: 0 0 80px rgba(245, 158, 11, 0.15);
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            font-family: 'Arial', sans-serif;
+            font-family: 'Inter', sans-serif;
+            background: var(--navy);
+            color: var(--text);
+            overflow-x: hidden;
         }
 
-        .container {
+        /* ─── NAVBAR ─────────────────────────────────────── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 14, 26, 0.85);
+            border-bottom: 1px solid var(--border);
+            padding: 0 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+            transition: background 0.3s;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .nav-logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .nav-logo-text {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--text);
+        }
+
+        .nav-logo-text span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.2s;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+        }
+
+        .nav-divider {
+            width: 1px;
+            height: 20px;
+            background: var(--border);
+        }
+
+        .nav-login {
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 7px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .nav-login:hover {
+            background: rgba(245, 158, 11, 0.1);
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: #000;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 9px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(245, 158, 11, 0.45);
+        }
+
+        /* ─── HERO — Full-bleed redBus style ──────────── */
+        .hero {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 88vh;
+            padding: 0 5% 0;
+            overflow: hidden;
+        }
+
+        /* Full-bleed background image */
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 75%;
+            transform: scale(1.08);
+        }
+
+        /* Dramatic two-layer overlay: dark top for text, fade to transparent at bus */
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background:
+                linear-gradient(to bottom,
+                    rgba(10, 14, 26, 0.82) 0%,
+                    rgba(10, 14, 26, 0.55) 45%,
+                    rgba(10, 14, 26, 0.75) 100%);
+        }
+
+        /* Centered hero text block */
+        .hero-center {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            width: 100%;
+            max-width: 860px;
+            padding-top: 100px;
+            padding-bottom: 0;
+            margin-bottom: auto;
+        }
+
+        .hero-center h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .hero-center h1 .gold {
+            color: var(--accent);
+        }
+
+        .hero-center p {
+            font-size: 1rem;
+            color: rgba(241, 245, 249, 0.75);
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        /* booking widget sits center of viewport */
+        .hero-booking-wrap {
+            position: relative;
+            z-index: 3;
+            width: 100%;
+            margin-bottom: auto;
+            padding-bottom: 0;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(245, 158, 11, 0.12);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            color: var(--accent);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            padding: 5px 14px;
+            border-radius: 50px;
+            margin-bottom: 18px;
+        }
+
+        .hero-badge .dot {
+            width: 7px;
+            height: 7px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse-dot 2s infinite;
+        }
+
+        /* Ambient glow blobs */
+
+        /* ── Booking Widget — Professional Horizontal Bar ── */
+        .booking-widget {
+            background: rgba(10, 14, 26, 0.75);
+            backdrop-filter: blur(28px);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-radius: 16px;
+            padding: 18px 20px;
+            max-width: 840px;
+            width: 100%;
+            box-shadow: 0 0 60px rgba(245, 158, 11, 0.12), 0 24px 48px rgba(0, 0, 0, 0.5);
+        }
+
+        /* When inside hero-booking-wrap, go full-width and flush */
+        .hero-booking-wrap .booking-widget {
+            max-width: 100%;
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+            border-bottom: none;
+            background: rgba(8, 12, 22, 0.92);
+            backdrop-filter: blur(32px);
+            box-shadow: none;
+        }
+
+        .booking-widget-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .booking-widget-header h3 {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: var(--accent);
+            text-transform: uppercase;
+        }
+
+        .booking-tabs {
+            display: flex;
+            gap: 6px;
+        }
+
+        .booking-tab {
+            padding: 5px 14px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            background: transparent;
+            transition: all 0.2s;
+        }
+
+        .booking-tab.active {
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: #000;
+            border-color: transparent;
+        }
+
+        /* Horizontal search row */
+        .booking-bar {
+            display: flex;
+            align-items: stretch;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .booking-bar .booking-field {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .booking-field {
+            padding: 12px 16px;
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+            transition: background 0.2s;
+            cursor: text;
+        }
+
+        .booking-field:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .booking-field:last-of-type {
+            border-right: none;
+        }
+
+        .booking-field label {
+            display: block;
+            font-size: 0.65rem;
+            color: var(--muted);
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 3px;
+        }
+
+        .booking-field input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text);
+            font-size: 0.9rem;
+            font-weight: 600;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .booking-field input::placeholder {
+            color: rgba(148, 163, 184, 0.6);
+            font-weight: 400;
+        }
+
+        .booking-field input[type=date]::-webkit-calendar-picker-indicator {
+            filter: invert(0.6);
+            cursor: pointer;
+        }
+
+        .bar-divider {
+            background: rgba(255, 255, 255, 0.08);
+            width: 1px;
+        }
+
+        .swap-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4px;
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .swap-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            transition: transform 0.35s, background 0.2s;
+            flex-shrink: 0;
+        }
+
+        .swap-btn:hover {
+            transform: rotate(180deg);
+            background: rgba(245, 158, 11, 0.25);
+        }
+
+        .search-btn {
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: #000;
+            border: none;
+            padding: 0 28px;
+            font-size: 0.9rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: opacity 0.2s, box-shadow 0.2s;
+            letter-spacing: 0.03em;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            white-space: nowrap;
+            min-width: 130px;
+            justify-content: center;
+        }
+
+        .search-btn:hover {
+            opacity: 0.92;
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ─── STATS STRIP ─────────────────────────────────── */
+        .stats {
+            background: linear-gradient(90deg, rgba(245, 158, 11, 0.08), rgba(59, 130, 246, 0.08));
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 40px 5%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .stat-item {
             text-align: center;
         }
 
-        h1 {
-            font-size: 120px;
-            color: white;
-            animation: bounce 1s ease-in-out infinite;
-            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        .stat-item+.stat-item {
+            border-left: 1px solid var(--border);
         }
 
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
+        .stat-num {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .stat-num span {
+            font-size: 1.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-top: 6px;
+            font-weight: 500;
+        }
+
+        /* ─── SECTIONS ────────────────────────────────────── */
+        section {
+            padding: 100px 5%;
+        }
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .section-tag::before,
+        .section-tag::after {
+            content: '';
+            flex: 1;
+            min-width: 30px;
+            height: 1px;
+            background: var(--accent);
+            opacity: 0.4;
+        }
+
+        h2.section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .section-sub {
+            color: var(--muted);
+            font-size: 1.05rem;
+            max-width: 500px;
+            line-height: 1.7;
+        }
+
+        /* ─── ROUTES ──────────────────────────────────────── */
+        .routes-section {
+            background: var(--navy-light);
+        }
+
+        .routes-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .routes-header .section-sub {
+            margin: 0 auto;
+        }
+
+        .routes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .route-card {
+            background: var(--navy-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .route-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .route-card:hover {
+            border-color: rgba(245, 158, 11, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .route-card:hover::before {
+            opacity: 1;
+        }
+
+        .route-cities {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .route-arrow {
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .route-meta {
+            font-size: 0.8rem;
+            color: var(--muted);
+            display: flex;
+            gap: 16px;
+        }
+
+        .route-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .route-price {
+            text-align: right;
+        }
+
+        .route-price .from {
+            font-size: 0.7rem;
+            color: var(--muted);
+        }
+
+        .route-price .amount {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        /* ─── FEATURES / AMENITIES ─────────────────────────── */
+        .features-section {
+            background: var(--navy);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--navy-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 36px 28px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(245, 158, 11, 0.35);
+        }
+
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            width: 60px;
+            height: 60px;
+            background: rgba(245, 158, 11, 0.1);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        /* ─── WHY BIGBUS ───────────────────────────────────── */
+        .trust-section {
+            background: var(--navy-light);
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .trust-visual {
+            position: relative;
+        }
+
+        .trust-image-wrap {
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .trust-image-wrap img {
+            width: 100%;
+            display: block;
+        }
+
+        .trust-badge-float {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: #000;
+            border-radius: 16px;
+            padding: 20px 24px;
+            font-weight: 800;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(245, 158, 11, 0.3);
+        }
+
+        .trust-badge-float .big-num {
+            font-size: 2.2rem;
+            display: block;
+            line-height: 1;
+        }
+
+        .trust-badge-float .label {
+            font-size: 0.75rem;
+            display: block;
+            font-weight: 600;
+            opacity: 0.8;
+        }
+
+        .trust-points {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .trust-point {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .trust-point-icon {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .trust-point-text h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .trust-point-text p {
+            font-size: 0.88rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* ─── FLEET ────────────────────────────────────────── */
+        .fleet-section {
+            background: var(--navy);
+        }
+
+        .fleet-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 60px;
+        }
+
+        .fleet-card {
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--navy-card);
+            transition: all 0.3s;
+        }
+
+        .fleet-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+
+        .fleet-card-img {
+            height: 180px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fleet-card-img-bg {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+        }
+
+        .fleet-card-img-bg.volvo {
+            background: linear-gradient(135deg, #0f1628, #1e3a5f);
+        }
+
+        .fleet-card-img-bg.mercedes {
+            background: linear-gradient(135deg, #1a0f28, #3d1a5f);
+        }
+
+        .fleet-card-img-bg.scania {
+            background: linear-gradient(135deg, #0f2628, #1a5f3a);
+        }
+
+        .fleet-card-body {
+            padding: 24px;
+        }
+
+        .fleet-card-body h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .fleet-card-body p {
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-bottom: 16px;
+        }
+
+        .fleet-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .fleet-tag {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 50px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            color: var(--blue);
+        }
+
+        /* ─── TESTIMONIALS ─────────────────────────────────── */
+        .testimonials-section {
+            background: var(--navy-light);
+        }
+
+        .testi-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 60px;
+        }
+
+        .testi-card {
+            background: var(--navy-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px;
+            transition: all 0.3s;
+        }
+
+        .testi-card:hover {
+            border-color: rgba(245, 158, 11, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .testi-card:first-child {
+            grid-column: span 2;
+        }
+
+        .stars {
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .testi-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--muted);
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+
+        .testi-text::before {
+            content: '\201C';
+            font-size: 3rem;
+            color: var(--accent);
+            opacity: 0.4;
+            line-height: 0;
+            vertical-align: -1rem;
+            margin-right: 4px;
+        }
+
+        .testi-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .testi-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #000;
+        }
+
+        .testi-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .testi-route {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        /* ─── OFFER STRIP ──────────────────────────────────── */
+        .offer-strip {
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            padding: 60px 5%;
+            text-align: center;
+        }
+
+        .offer-strip h2 {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #000;
+            margin-bottom: 10px;
+        }
+
+        .offer-strip p {
+            font-size: 1rem;
+            color: rgba(0, 0, 0, 0.7);
+            margin-bottom: 28px;
+        }
+
+        .offer-strip a {
+            display: inline-block;
+            background: #000;
+            color: var(--accent);
+            padding: 14px 36px;
+            border-radius: 50px;
+            font-weight: 800;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: transform 0.2s;
+        }
+
+        .offer-strip a:hover {
+            transform: scale(1.05);
+        }
+
+        /* ─── FOOTER ───────────────────────────────────────── */
+        footer {
+            background: #060810;
+            border-top: 1px solid var(--border);
+            padding: 80px 5% 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand p {
+            color: var(--muted);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin: 16px 0 24px;
+            max-width: 300px;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            text-decoration: none;
+            color: var(--muted);
+            transition: all 0.2s;
+        }
+
+        .social-icon:hover {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+        }
+
+        .footer-col h4 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-col ul a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: color 0.2s;
+        }
+
+        .footer-col ul a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.82rem;
+            color: var(--muted);
+        }
+
+        .footer-bottom a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* ─── SCROLL REVEAL ANIMATION ──────────────────────── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ─── WHATSAPP FLOAT ────────────────────────────────── */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #25d366;
+            color: #fff;
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        /* ─── RESPONSIVE ─────────────────────────────────────── */
+        @media (max-width: 900px) {
+
+            .nav-links,
+            .nav-cta {
+                display: none;
             }
-            50% {
-                transform: translateY(-30px);
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat-item {
+                border-left: none !important;
+            }
+
+            .stat-item:nth-child(2n) {
+                border-left: 1px solid var(--border) !important;
+            }
+
+            .features-grid,
+            .fleet-cards {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .trust-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .testi-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testi-card:first-child {
+                grid-column: span 1;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .features-grid,
+            .fleet-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .booking-row {
+                grid-template-columns: 1fr;
+            }
+
+            .swap-btn {
+                display: none;
+            }
+
+            .booking-dates {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1>Hi</h1>
+
+    <!-- NAVBAR -->
+    <nav id="navbar">
+        <a href="#" class="nav-logo">
+            <img src="assets/bigbus_original_logo.png" alt="BigBus Logo" style="height:52px; width:auto;" />
+        </a>
+        <ul class="nav-links">
+            <li><a href="#routes">Routes</a></li>
+            <li><a href="#features">Amenities</a></li>
+            <li><a href="#fleet">Fleet</a></li>
+            <li><a href="#testimonials">Reviews</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li class="nav-divider"></li>
+            <li><a href="#" class="nav-login">Login / Register</a></li>
+        </ul>
+        <a href="#booking" class="nav-cta">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                style="display:inline;vertical-align:middle;margin-right:5px">
+                <rect x="3" y="4" width="18" height="18" rx="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>Book Now</a>
+    </nav>
+
+    <!-- HERO — Full-bleed cinematic background + centered booking bar -->
+    <section class="hero" id="home">
+
+        <!-- Background: composite BigBus on scenic highway -->
+        <div class="hero-bg">
+            <img src="assets/bigbus_composite_hero.png"
+                alt="BigBus luxury coach on scenic South Indian highway at sunset" />
+        </div>
+        <div class="hero-overlay"></div>
+
+        <!-- Centered headline + tagline -->
+        <div class="hero-center">
+            <div class="hero-badge"><span class="dot"></span> South India's #1 Luxury Bus Service</div>
+            <h1>Book Your <span class="gold">BigBus</span> Journey Now</h1>
+        </div>
+
+        <!-- Full-width booking bar anchored at the bottom of the hero -->
+        <div class="hero-booking-wrap" id="booking">
+            <div class="booking-widget">
+                <div class="booking-widget-header">
+                    <h3>Search Buses</h3>
+                    <div class="booking-tabs">
+                        <button class="booking-tab active" onclick="setTab(this,'one-way')">One Way</button>
+                        <button class="booking-tab" onclick="setTab(this,'return')">Return</button>
+                    </div>
+                </div>
+                <div class="booking-bar">
+                    <div class="booking-field">
+                        <label>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 24 24"
+                                fill="currentColor" style="vertical-align:middle;margin-right:3px">
+                                <circle cx="12" cy="10" r="3" />
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                            </svg>Source
+                        </label>
+                        <input type="text" placeholder="Ex: Hyderabad" id="origin" autocomplete="off" />
+                    </div>
+                    <div class="swap-wrap">
+                        <button class="swap-btn" onclick="swapCities()" title="Swap">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M7 16V4m0 0L3 8m4-4 4 4" />
+                                <path d="M17 8v12m0 0 4-4m-4 4-4-4" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="booking-field">
+                        <label>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 24 24"
+                                fill="currentColor" style="vertical-align:middle;margin-right:3px">
+                                <circle cx="12" cy="10" r="3" />
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                            </svg>Destination
+                        </label>
+                        <input type="text" placeholder="Ex: Bangalore" id="destination" autocomplete="off" />
+                    </div>
+                    <div class="bar-divider"></div>
+                    <div class="booking-field">
+                        <label>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                                style="vertical-align:middle;margin-right:3px">
+                                <rect x="3" y="4" width="18" height="18" rx="2" />
+                                <line x1="16" y1="2" x2="16" y2="6" />
+                                <line x1="8" y1="2" x2="8" y2="6" />
+                                <line x1="3" y1="10" x2="21" y2="10" />
+                            </svg>Date
+                        </label>
+                        <input type="date" id="depart" />
+                    </div>
+                    <div class="booking-field" id="return-field" style="opacity:0.45;pointer-events:none;">
+                        <label>Return Date</label>
+                        <input type="date" id="return_date" placeholder="Optional" />
+                    </div>
+                    <button class="search-btn" id="search-btn" onclick="searchBus()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        </svg>
+                        Search
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- STATS STRIP -->
+    <div class="stats">
+        <div class="stat-item reveal">
+            <div class="stat-num"><span id="stat-routes">0</span><span>+</span></div>
+            <div class="stat-label">Routes Across South India</div>
+        </div>
+        <div class="stat-item reveal" style="transition-delay:0.1s">
+            <div class="stat-num"><span id="stat-buses">0</span><span>+</span></div>
+            <div class="stat-label">Luxury Buses in Fleet</div>
+        </div>
+        <div class="stat-item reveal" style="transition-delay:0.2s">
+            <div class="stat-num"><span id="stat-passengers">0</span><span>K+</span></div>
+            <div class="stat-label">Happy Passengers</div>
+        </div>
+        <div class="stat-item reveal" style="transition-delay:0.3s">
+            <div class="stat-num"><span id="stat-rating">0</span><span>/5</span></div>
+            <div class="stat-label">Average Customer Rating</div>
+        </div>
     </div>
+
+    <!-- ROUTES -->
+    <section class="routes-section" id="routes">
+        <div class="routes-header reveal">
+            <div class="section-tag">Popular Routes</div>
+            <h2 class="section-title">Where Would You<br />Like to Go?</h2>
+            <p class="section-sub">Choose from our most-loved routes, all operated with premium luxury coaches and live
+                GPS tracking.</p>
+        </div>
+        <div class="routes-grid">
+            <div class="route-card reveal">
+                <div class="route-info">
+                    <div class="route-cities">Hyderabad <span class="route-arrow">→</span> Bangalore</div>
+                    <div class="route-meta"><span><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                style="display:inline;vertical-align:middle">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg> 10 hrs</span><span><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                style="display:inline;vertical-align:middle">
+                                <rect x="1" y="3" width="15" height="13" rx="2" />
+                                <path d="M16 8h4l3 3v5h-7V8z" />
+                                <circle cx="5.5" cy="18.5" r="2.5" />
+                                <circle cx="18.5" cy="18.5" r="2.5" />
+                            </svg> Volvo / Mercedes</span></div>
+                </div>
+                <div class="route-price">
+                    <div class="from">from</div>
+                    <div class="amount">₹950</div>
+                </div>
+            </div>
+            <div class="route-card reveal" style="transition-delay:0.05s">
+                <div class="route-info">
+                    <div class="route-cities">Hyderabad <span class="route-arrow">→</span> Tirupati</div>
+                    <div class="route-meta"><span><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                style="display:inline;vertical-align:middle">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg> 9 hrs</span><span><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                style="display:inline;vertical-align:middle">
+                                <rect x="1" y="3" width="15" height="13" rx="2" />
+                                <path d="M16 8h4l3 3v5h-7V8z" />
+                                <circle cx="5.5" cy="18.5" r="2.5" />
+                                <circle cx="18.5" cy="18.5" r="2.5" />
+                            </svg> Scania / Volvo</span></div>
+                </div>
+                <div class="route-price">
+                    <div class="from">from</div>
+                    <div class="amount">₹750</div>
+                </div>
+            </div>
+            <div class="route-card reveal" style="transition-delay:0.1s">
+                <div class="route-info">
+                    <div class="route-cities">Guntur <span class="route-arrow">→</span> Hyderabad</div>
+                    <div class="route-meta"><span><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                style="display:inline;vertical-align:middle">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg> 5 hrs</span><span><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                style="display:inline;vertical-align:middle">
+                                <rect x="1" y="3" width="15" height="13" rx="2" />
+                                <path d="M16 8h4l3 3v5h-7V8z" />
+                                <circle cx="5.5" cy="18.5" r="2.5" />
+                                <circle cx="18.5" cy="18.5" r="2.5" />
+                            </svg> Mercedes</span></div>
+                </div>
+                <div class="route-price">
+                    <div class="from">from</div>
+                    <div class="amount">₹550</div>
+                </div>
+            </div>
+            <div class="route-card reveal" style="transition-delay:0.15s">
+                <div class="route-info">
+                    <div class="route-cities">Vijayawada <span class="route-arrow">→</span> Bangalore</div>
+                    <div class="route-meta"><span><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                style="display:inline;vertical-align:middle">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg> 12 hrs</span><span><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                style="display:inline;vertical-align:middle">
+                                <rect x="1" y="3" width="15" height="13" rx="2" />
+                                <path d="M16 8h4l3 3v5h-7V8z" />
+                                <circle cx="5.5" cy="18.5" r="2.5" />
+                                <circle cx="18.5" cy="18.5" r="2.5" />
+                            </svg> Volvo Multi-axle</span></div>
+                </div>
+                <div class="route-price">
+                    <div class="from">from</div>
+                    <div class="amount">₹1,100</div>
+                </div>
+            </div>
+            <div class="route-card reveal" style="transition-delay:0.2s">
+                <div class="route-info">
+                    <div class="route-cities">Tirupati <span class="route-arrow">→</span> Guntur</div>
+                    <div class="route-meta"><span><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                style="display:inline;vertical-align:middle">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg> 6 hrs</span><span><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                style="display:inline;vertical-align:middle">
+                                <rect x="1" y="3" width="15" height="13" rx="2" />
+                                <path d="M16 8h4l3 3v5h-7V8z" />
+                                <circle cx="5.5" cy="18.5" r="2.5" />
+                                <circle cx="18.5" cy="18.5" r="2.5" />
+                            </svg> Scania</span></div>
+                </div>
+                <div class="route-price">
+                    <div class="from">from</div>
+                    <div class="amount">₹620</div>
+                </div>
+            </div>
+            <div class="route-card reveal" style="transition-delay:0.25s">
+                <div class="route-info">
+                    <div class="route-cities">Bangalore <span class="route-arrow">→</span> Chennai</div>
+                    <div class="route-meta"><span><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                style="display:inline;vertical-align:middle">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg> 6 hrs</span><span><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                style="display:inline;vertical-align:middle">
+                                <rect x="1" y="3" width="15" height="13" rx="2" />
+                                <path d="M16 8h4l3 3v5h-7V8z" />
+                                <circle cx="5.5" cy="18.5" r="2.5" />
+                                <circle cx="18.5" cy="18.5" r="2.5" />
+                            </svg> Volvo</span></div>
+                </div>
+                <div class="route-price">
+                    <div class="from">from</div>
+                    <div class="amount">₹700</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES / AMENITIES -->
+    <section class="features-section" id="features">
+        <div style="text-align:center; margin-bottom: 60px;" class="reveal">
+            <div class="section-tag">Onboard Amenities</div>
+            <h2 class="section-title">Every Journey Feels<br />Like First Class</h2>
+            <p class="section-sub" style="margin: 0 auto;">We've thought of everything so you can sit back and enjoy the
+                ride.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card reveal">
+                <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                        viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                        <path d="M12 2v2M12 18v2M2 12h2M20 12h2" />
+                    </svg></div>
+                <h3>Live GPS Tracking</h3>
+                <p>Real-time location updates so your family knows exactly where you are. Track your bus before you even
+                    board.</p>
+            </div>
+            <div class="feature-card reveal" style="transition-delay:0.1s">
+                <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                        viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M5 12.55a11 11 0 0 1 14.08 0" />
+                        <path d="M1.42 9a16 16 0 0 1 21.16 0" />
+                        <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
+                        <line x1="12" y1="20" x2="12" y2="20" />
+                    </svg></div>
+                <h3>Onboard WiFi</h3>
+                <p>Stay connected throughout your journey. Stream, work, or chat — our coaches come equipped with
+                    high-speed internet.</p>
+            </div>
+            <div class="feature-card reveal" style="transition-delay:0.2s">
+                <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                        viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M20.2 7.8l-7.7 7.7-4-4-5.7 5.7" />
+                        <path d="M15 7h6v6" />
+                    </svg></div>
+                <h3>Luxury Sleeper Seats</h3>
+                <p>Fully reclining seats that convert to flat sleepers. Arrive rested and refreshed, not fatigued.</p>
+            </div>
+            <div class="feature-card reveal" style="transition-delay:0.3s">
+                <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                        viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg></div>
+                <h3>Safety First</h3>
+                <p>Fire extinguishers, emergency hammers, safety exits, and CCTV cameras on every coach. Your safety is
+                    non-negotiable.</p>
+            </div>
+            <div class="feature-card reveal" style="transition-delay:0.4s">
+                <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                        viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
+                        <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
+                        <line x1="6" y1="1" x2="6" y2="4" />
+                        <line x1="10" y1="1" x2="10" y2="4" />
+                        <line x1="14" y1="1" x2="14" y2="4" />
+                    </svg></div>
+                <h3>Complimentary Snacks</h3>
+                <p>Enjoy snacks and water bottles on select routes. We believe your journey should be as enjoyable as
+                    your destination.</p>
+            </div>
+            <div class="feature-card reveal" style="transition-delay:0.5s">
+                <div class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                        viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+                        <path
+                            d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
+                    </svg></div>
+                <h3>Entertainment System</h3>
+                <p>Central entertainment screens with curated content to keep you entertained on long-haul routes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY BIGBUS -->
+    <section class="trust-section">
+        <div class="trust-grid">
+            <div class="trust-visual reveal">
+                <div class="trust-image-wrap">
+                    <img src="assets/why_bigbus.png" alt="BigBus fleet at terminal"
+                        style="filter: saturate(1.1) brightness(0.95);" />
+                </div>
+                <div class="trust-badge-float">
+                    <span class="big-num">12+</span>
+                    <span class="label">Years of Excellence</span>
+                </div>
+            </div>
+            <div class="trust-content reveal" style="transition-delay:0.15s">
+                <div class="section-tag">Why Choose BigBus</div>
+                <h2 class="section-title">A New Era of Bus Travel in South India</h2>
+                <p class="section-sub">We didn't just build a bus company — we reimagined what bus travel can feel like.
+                    Premium, punctual, and passenger-first.</p>
+                <div class="trust-points">
+                    <div class="trust-point">
+                        <div class="trust-point-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg></div>
+                        <div class="trust-point-text">
+                            <h4>Punctuality Guaranteed</h4>
+                            <p>Our route planning is optimized for on-time departures and arrivals, so your plans don't
+                                get derailed.</p>
+                        </div>
+                    </div>
+                    <div class="trust-point">
+                        <div class="trust-point-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                            </svg></div>
+                        <div class="trust-point-text">
+                            <h4>24/7 Customer Support</h4>
+                            <p>Attentive support team ready to resolve any issues with speed and warmth, day or night.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="trust-point">
+                        <div class="trust-point-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <line x1="12" y1="1" x2="12" y2="23" />
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                            </svg></div>
+                        <div class="trust-point-text">
+                            <h4>Best-in-Class Pricing</h4>
+                            <p>Premium comfort at prices that make sense. Regular discount offers to reward loyal
+                                passengers.</p>
+                        </div>
+                    </div>
+                    <div class="trust-point">
+                        <div class="trust-point-icon"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect x="1" y="3" width="15" height="13" rx="2" />
+                                <path d="M16 8h4l3 3v5h-7V8z" />
+                                <circle cx="5.5" cy="18.5" r="2.5" />
+                                <circle cx="18.5" cy="18.5" r="2.5" />
+                            </svg></div>
+                        <div class="trust-point-text">
+                            <h4>World-Class Fleet</h4>
+                            <p>Mercedes Benz, Volvo, and Scania multi-axle coaches — maintained to the highest
+                                standards.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FLEET -->
+    <section class="fleet-section" id="fleet">
+        <div style="text-align:center;" class="reveal">
+            <div class="section-tag">Our Fleet</div>
+            <h2 class="section-title">The Finest Coaches<br />in South India</h2>
+        </div>
+        <div class="fleet-cards">
+            <div class="fleet-card reveal">
+                <div class="fleet-card-img">
+                    <img src="assets/fleet_volvo.png" alt="BigBus Volvo Multi-Axle coach on South Indian highway"
+                        style="width:100%;height:100%;object-fit:cover;border-radius:16px 16px 0 0;" />
+                </div>
+                <div class="fleet-card-body">
+                    <h3>Volvo Multi-Axle</h3>
+                    <p>Sweden-engineered precision meets Indian roads. The gold standard in long-haul comfort.</p>
+                    <div class="fleet-tags">
+                        <span class="fleet-tag">Sleeper</span>
+                        <span class="fleet-tag">WiFi</span>
+                        <span class="fleet-tag">USB Charging</span>
+                        <span class="fleet-tag">AC</span>
+                    </div>
+                </div>
+            </div>
+            <div class="fleet-card reveal" style="transition-delay:0.1s">
+                <div class="fleet-card-img">
+                    <img src="assets/fleet_mercedes.png" alt="BigBus Mercedes-Benz coach at scenic viewpoint"
+                        style="width:100%;height:100%;object-fit:cover;border-radius:16px 16px 0 0;" />
+                </div>
+                <div class="fleet-card-body">
+                    <h3>Mercedes Benz Multi-Axle</h3>
+                    <p>German luxury redefined for bus travel. Whisper-quiet engines, ultra-smooth suspension.</p>
+                    <div class="fleet-tags">
+                        <span class="fleet-tag">Semi-Sleeper</span>
+                        <span class="fleet-tag">WiFi</span>
+                        <span class="fleet-tag">TV Screen</span>
+                        <span class="fleet-tag">AC</span>
+                    </div>
+                </div>
+            </div>
+            <div class="fleet-card reveal" style="transition-delay:0.2s">
+                <div class="fleet-card-img">
+                    <img src="assets/fleet_scania.png" alt="BigBus Scania coach on city night highway"
+                        style="width:100%;height:100%;object-fit:cover;border-radius:16px 16px 0 0;" />
+                </div>
+                <div class="fleet-card-body">
+                    <h3>Scania Comfort Coach</h3>
+                    <p>Scania's renowned build quality — durable, spacious, and exceptionally comfortable for night
+                        travel.</p>
+                    <div class="fleet-tags">
+                        <span class="fleet-tag">Sleeper</span>
+                        <span class="fleet-tag">Water Bottle</span>
+                        <span class="fleet-tag">Reading Light</span>
+                        <span class="fleet-tag">AC</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials-section" id="testimonials">
+        <div style="text-align:center; margin-bottom:20px;" class="reveal">
+            <div class="section-tag">Passenger Reviews</div>
+            <h2 class="section-title">Loved by Thousands<br />Across South India</h2>
+        </div>
+        <div class="testi-grid">
+            <div class="testi-card reveal">
+                <div class="stars">★★★★★</div>
+                <p class="testi-text">I recently travelled from Bangalore with Big Bus. It was a sleeper bus and I felt
+                    the bus was very comfortable and the staff was very friendly and co-operative. Great going Big Bus,
+                    keep it up!</p>
+                <div class="testi-author">
+                    <div class="testi-avatar">G</div>
+                    <div>
+                        <div class="testi-name">Gangadhar</div>
+                        <div class="testi-route">Bangalore → Hyderabad</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card reveal" style="transition-delay:0.1s">
+                <div class="stars">★★★★★</div>
+                <p class="testi-text">Since my first ride with Big Bus I have been their regular customer. The reason is
+                    their luxurious buses and their very reasonable rates. Nothing else comes close.</p>
+                <div class="testi-author">
+                    <div class="testi-avatar">A</div>
+                    <div>
+                        <div class="testi-name">Ashish</div>
+                        <div class="testi-route">Tirupati → Guntur</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card reveal" style="transition-delay:0.15s">
+                <div class="stars">★★★★★</div>
+                <p class="testi-text">Travelled from Hyderabad with my friends. The buses were well-maintained and the
+                    staff was very courteous. It feels great to travel with a company that genuinely cares about
+                    comfort.</p>
+                <div class="testi-author">
+                    <div class="testi-avatar">K</div>
+                    <div>
+                        <div class="testi-name">Keshav Kumar</div>
+                        <div class="testi-route">Hyderabad → Chennai</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card reveal" style="transition-delay:0.2s">
+                <div class="stars">★★★★★</div>
+                <p class="testi-text">I booked for me and my grandparents from Vijayawada. The experience was great — my
+                    grandparents were not fatigued at all, and we reached on-time. Highly recommend!</p>
+                <div class="testi-author">
+                    <div class="testi-avatar">V</div>
+                    <div>
+                        <div class="testi-name">Vanishree</div>
+                        <div class="testi-route">Vijayawada → Hyderabad</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OFFER STRIP -->
+    <div class="offer-strip">
+        <h2>Flat 5% Off — No Coupon Needed!</h2>
+        <p>Book your next journey online and save instantly. No promo code required — discount applied automatically.
+        </p>
+        <a href="#booking">Grab the Deal →</a>
+    </div>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="nav-logo" style="text-decoration:none; margin-bottom: 0;">
+                    <img src="assets/bigbus_original_logo.png" alt="BigBus" style="height:46px; width:auto;" />
+                </a>
+                <p>Redefining luxury bus travel across South India since 2013. Your comfort is our commitment, your
+                    safety is our promise.</p>
+                <div class="footer-socials">
+                    <a class="social-icon" href="#" title="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                            height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                        </svg></a>
+                    <a class="social-icon" href="#" title="Twitter / X"><svg xmlns="http://www.w3.org/2000/svg"
+                            width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg></a>
+                    <a class="social-icon" href="#" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="15"
+                            height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                        </svg></a>
+                    <a class="social-icon" href="#" title="YouTube"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                            height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+                            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#0a0e1a" />
+                        </svg></a>
+                    <a class="social-icon" href="#" title="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="15"
+                            height="15" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                            <rect x="2" y="9" width="4" height="12" />
+                            <circle cx="4" cy="4" r="2" />
+                        </svg></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Manage Bookings</a></li>
+                    <li><a href="#">Schedules</a></li>
+                    <li><a href="#">Offers</a></li>
+                    <li><a href="#">Gallery</a></li>
+                    <li><a href="#">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Refund Status</a></li>
+                    <li><a href="#">Feedback</a></li>
+                    <li><a href="#">Testimonials</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Agent Login</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="tel:6309426666"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                style="display:inline;vertical-align:middle;margin-right:5px">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 5.5 5.5l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.04z" />
+                            </svg>630-942-6666</a></li>
+                    <li><a href="mailto:big.bigbusticket@gmail.com"><svg xmlns="http://www.w3.org/2000/svg" width="12"
+                                height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round"
+                                style="display:inline;vertical-align:middle;margin-right:5px">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6" />
+                            </svg>big.bigbusticket@gmail.com</a></li>
+                    <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:5px">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>Sri Nagar Colony, Hyderabad, Telangana — 500073</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 BigBus. All rights reserved.</span>
+            <span><a href="#">Privacy Policy</a> · <a href="#">Terms & Conditions</a></span>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a class="whatsapp-float" href="https://wa.me/916309426666" target="_blank" title="Chat on WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="white">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" />
+        </svg>
+    </a>
+
+    <script>
+        // ─── BOOKING TABS ─────────────────────────────────
+        function setTab(el, type) {
+            document.querySelectorAll('.booking-tab').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+            const returnField = document.getElementById('return-field');
+            if (returnField) {
+                returnField.style.opacity = type === 'return' ? '1' : '0.45';
+                returnField.style.pointerEvents = type === 'return' ? 'all' : 'none';
+            }
+        }
+
+        function swapCities() {
+            const from = document.getElementById('origin');
+            const to = document.getElementById('destination');
+            [from.value, to.value] = [to.value, from.value];
+        }
+
+        function searchBus() {
+            const origin = document.getElementById('origin').value.trim() || 'Hyderabad';
+            const dest = document.getElementById('destination').value.trim() || 'Bangalore';
+            const btn = document.querySelector('.search-btn');
+            btn.style.opacity = '0.6';
+            btn.textContent = 'Searching...';
+            setTimeout(() => {
+                btn.style.opacity = '1';
+                btn.textContent = `Routes Found: ${origin} → ${dest}`;
+                setTimeout(() => { btn.textContent = 'Search Available Buses'; }, 2500);
+            }, 1400);
+        }
+
+        // ─── SCROLL REVEAL ────────────────────────────────
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // ─── ANIMATED COUNTERS ────────────────────────────
+        function animateCounter(id, target, suffix = '', duration = 2000) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            let start = 0;
+            const increment = target / (duration / 16);
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) { el.textContent = target; clearInterval(timer); }
+                else { el.textContent = Math.floor(start); }
+            }, 16);
+        }
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    animateCounter('stat-routes', 75);
+                    animateCounter('stat-buses', 42);
+                    animateCounter('stat-passengers', 500);
+                    document.getElementById('stat-rating').textContent = '4.8';
+                    statsObserver.disconnect();
+                }
+            });
+        }, { threshold: 0.5 });
+        const statsEl = document.querySelector('.stats');
+        if (statsEl) statsObserver.observe(statsEl);
+
+        // ─── NAVBAR SCROLL STYLE ──────────────────────────
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 60) {
+                nav.style.background = 'rgba(10,14,26,0.97)';
+                nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.4)';
+            } else {
+                nav.style.background = 'rgba(10,14,26,0.85)';
+                nav.style.boxShadow = 'none';
+            }
+        });
+
+        // ─── SET DEFAULT DATE ─────────────────────────────
+        const today = new Date();
+        const fmt = d => d.toISOString().split('T')[0];
+        document.getElementById('depart').value = fmt(new Date(today.setDate(today.getDate() + 1)));
+    </script>
 </body>
+
 </html>
